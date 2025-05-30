@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sejarah Oppenheimer</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000000;
+    color: #eee;
+    overflow-x: hidden;
+  }
+  a {
+    color: #FFD700;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Container */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem 6rem;
+  }
+
+  /* Header */
+  header {
+    position: relative;
+    padding: 4rem 1rem 6rem;
+    text-align: center;
+    overflow: hidden;
+  }
+  header h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: #FFD700;
+    margin-bottom: 0.2em;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #FFD700AA;
+  }
+  header p {
+    font-size: 1.25rem;
+    color: #ccc;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Animated background shapes */
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #999999, #CCCCCC);
+    opacity: 0.15;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    filter: grayscale(100%);
+  }
+  #shape1 {
+    width: 180px; height: 180px;
+    top: 10%;
+    left: 5%;
+    animation: floatUpDown 8s ease-in-out infinite alternate;
+  }
+  #shape2 {
+    width: 260px; height: 260px;
+    top: 30%;
+    right: 10%;
+    animation: floatLeftRight 12s ease-in-out infinite alternate;
+  }
+  #shape3 {
+    width: 100px; height: 100px;
+    top: 70%;
+    left: 50%;
+    animation: floatUpDown 10s ease-in-out infinite alternate;
+  }
+  /* Yellow horizontal floating blobs */
+  .shape-yellow {
+    position: absolute;
+    border-radius: 50%;
+    background: #FFD700;
+    opacity: 0.1;
+    filter: blur(12px);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  #yellow1 {
+    width: 220px; height: 220px;
+    top: 80%;
+    left: 15%;
+    animation: floatSideToSide 9s ease-in-out infinite alternate;
+  }
+  #yellow2 {
+    width: 180px; height: 180px;
+    top: 50%;
+    right: 35%;
+    animation: floatSideToSide 11s ease-in-out infinite alternate;
+  }
+
+  @keyframes floatUpDown {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-30px);}
+  }
+  @keyframes floatLeftRight {
+    0% {transform: translateX(0);}
+    100% {transform: translateX(40px);}
+  }
+  @keyframes floatSideToSide {
+    0% {transform: translateX(0);}
+    100% {transform: translateX(45px);}
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    margin-top: 2rem;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #FFD700, #B0A800);
+    border-radius: 2px;
+  }
+
+  /* Timeline item */
+  .timeline-item {
+    position: relative;
+    margin-bottom: 5rem;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideFadeIn 0.8s forwards;
+  }
+  .timeline-item:nth-child(even) {
+    transform: translateX(50px);
+  }
+  .timeline-item:nth-child(even).animated {
+    animation-name: slideFadeInRight;
+  }
+
+  /* Timeline circles */
+  .circle {
+    position: absolute;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #FFD700;
+    box-shadow: 0 0 15px #FFD700CC;
+    top: 0;
+  }
+
+  /* Text Content */
+  .content {
+    background: #111111;
+    padding: 1.6rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 40px #FFD70033;
+    transition: box-shadow 0.4s ease;
+    border: 1px solid #333333;
+    position: relative;
+    overflow: hidden;
+  }
+  .content:hover {
+    box-shadow: 0 0 60px #FFD700DD;
+    border-color: #FFD700;
+  }
+  .content h3 {
+    margin-bottom: 0.6rem;
+    color: #FFE873;
+  }
+  .content time {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #aaa;
+    display: block;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+  .content p {
+    line-height: 1.6;
+    color: #ddd;
+  }
+
+  /* Images */
+  .content img {
+    margin-top: 1rem;
+    border-radius: 10px;
+    max-width: 100%;
+    box-shadow: 0 0 20px #FFD70077;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    display: block;
+  }
+  .content img.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem 1rem 4rem;
+    font-size: 0.9rem;
+    color: #555555;
+  }
+
+  /* Responsive */
+  @media screen and (max-width: 600px) {
+    header h1 {
+      font-size: 2.25rem;
+      letter-spacing: 0.1em;
+    }
+    .timeline {
+      padding-left: 1.2rem;
+    }
+    .timeline::before {
+      left: 20px;
+    }
+    .circle {
+      left: 10px;
+    }
+  }
+
+  /* Animations */
+  @keyframes slideFadeIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes slideFadeInRight {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="shape" id="shape1"></div>
+  <div class="shape" id="shape2"></div>
+  <div class="shape" id="shape3"></div>
+  <div class="shape-yellow" id="yellow1"></div>
+  <div class="shape-yellow" id="yellow2"></div>
+  <h1>Sejarah Oppenheimer</h1>
+  <p>
+    Mengulas perjalanan hidup J. Robert Oppenheimer, ilmuwan fisika terkenal yang dikenal sebagai "Bapak Bom Atom" dan perannya dalam sejarah dunia. Gabut gua cik
+  </p>
+</header>
+
+<main class="container">
+  <section class="timeline" id="timeline">
+    <article class="timeline-item" style="animation-delay: 0.2s;">
+      <span class="circle"></span>
+      <div class="content">
+        <time>1904</time>
+        <h3>Kelahiran J. Robert Oppenheimer</h3>
+        <p>Juli 22, 1904, Oppenheimer lahir di New York City, Amerika Serikat, dalam keluarga Yahudi dari keturunan Jerman.</p>
+        <img src="Oppenheimer.jpeg" alt="J. Robert " loading="lazy" />
+      </div>
+    </article>
+    <article class="timeline-item" style="animation-delay: 0.4s;">
+      <span class="circle"></span>
+      <div class="content">
+        <time>1925</time>
+        <h3>Pendidikan dan Penelitian</h3>
+        <p>Oppenheimer menyelesaikan studi fisika di Harvard dan kemudian melakukan riset doktoralnya di Universitas Göttingen, Jerman, menjadi salah satu fisikawan terkemuka muda.</p>
+        <img src="opp2.jpeg" loading="lazy" />
+      </div>
+    </article>
+    <article class="timeline-item" style="animation-delay: 0.6s;">
+      <span class="circle"></span>
+      <div class="content">
+        <time>1942-1945</time>
+        <h3>Proyek Manhattan</h3>
+        <p>Oppenheimer menjadi kepala ilmuwan proyek Manhattan, yang bertanggung jawab mengembangkan bom atom selama Perang Dunia II.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Trinity_Test_Blast.jpg" alt="Trinity Nuclear Test" loading="lazy" />
+      </div>
+    </article>
+    <article class="timeline-item" style="animation-delay: 0.8s;">
+      <span class="circle"></span>
+      <div class="content">
+        <time>1945</time>
+        <h3>Uji Coba Trinity</h3>
+        <p>Pada Juli 1945, uji coba bom atom pertama dengan kode "Trinity" berhasil dilakukan di New Mexico, menandai era baru dalam perang dan energi nuklir.</p>
+      </div>
+    </article>
+    <article class="timeline-item" style="animation-delay: 1s;">
+      <span class="circle"></span>
+      <div class="content">
+        <time>1947-1954</time>
+        <h3>Kontroversi dan Pengadilan Keamanan</h3>
+        <p>Oppenheimer menghadapi tuduhan keamanan dan kegiatan pro-komunis dalam pengadilan keamanan yang kontroversial, yang berujung pada pencabutan izin keamanan militer serta berkurangnya pengaruhnya.</p>
+      </div>
+    </article>
+    <article class="timeline-item" style="animation-delay: 1.2s;">
+      <span class="circle"></span>
+      <div class="content">
+        <time>1967</time>
+        <h3>Kematian</h3>
+        <p>Oppenheimer meninggal dunia pada 18 Februari 1967 akibat kanker tenggorokan, meninggalkan warisan besar di dunia sains dan sejarah militer.</p>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer>
+  Made with passion about history and science &mdash; @Yann
+</footer>
+
+<script>
+  // Scroll animation for timeline items and images
+  const items = document.querySelectorAll('.timeline-item');
+  const images = document.querySelectorAll('.content img');
+
+  function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85
+    );
+  }
+
+  function animateItems() {
+    items.forEach(item => {
+      if (isInViewport(item) && !item.classList.contains('animated')) {
+        item.classList.add('animated');
+      }
+    });
+    images.forEach(img => {
+      if (isInViewport(img) && !img.classList.contains('visible')) {
+        img.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', animateItems);
+  window.addEventListener('load', animateItems);
+</script>
+</body>
+</html>
+
